@@ -26,13 +26,13 @@ for sub_dirs, dirs, files in os.walk(directory_str):
 
             if table_name == 'NCAATourneyCompactResults':
                 header = ['year int', 'day int', 'winning_id int', 'winning_score int', 'losing_id int', 'losing_score int', 'winner_location varchar(32)', 'overtime int']
-            if table_name == 'NCAATourneySeeds':
+            elif table_name == 'NCAATourneySeeds':
                 header = ['year int', 'seed varchar(6)', 'team_id int']
-            if table_name == 'NCAATourneySlots':
+            elif table_name == 'NCAATourneySlots':
                 header = ['year int', 'slot varchar(6)', 'strong_seed varchar(6)', 'weak_seed varchar(6)']
-            if table_name == 'Teams':
+            elif table_name == 'Teams':
                 header = ['team_id int', 'table_name varchar(32)', 'FirstD1Season int', 'LastD1Season int']
-            if table_name == 'TeamSpellings':
+            elif table_name == 'TeamSpellings':
                 header = ['TeamNameSpelling varchar(32)', 'TeamID int']
 
             cursor.execute("SHOW TABLES LIKE '{}'".format(table_name))
