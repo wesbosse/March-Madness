@@ -60,7 +60,7 @@ for sub_dirs, dirs, files in os.walk(directory_str):
                     query = 'insert into {} values ({})'.format(table_name, ','.join(formatted_row))
                     cursor.execute(query)
                     print(query)
-                # connection.commit()
-                # print(query)
+                connection.commit()
+                print(query)
         else:
             continue

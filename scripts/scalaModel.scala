@@ -1,6 +1,7 @@
 // Databricks notebook source
 import org.apache.spark.sql.functions.{regexp_extract, regexp_replace}
 import org.apache.spark.sql.types.IntegerType
+import java.sql.{Connection,DriverManager}
 
 import org.apache.spark.ml.feature.{StringIndexer, OneHotEncoder, VectorAssembler}
 import org.apache.spark.ml.regression.RandomForestRegressor
@@ -270,3 +271,24 @@ var maxIndex = cvModel.avgMetrics.indexOf(maxScore)
 // COMMAND ----------
 
 thiscvModel.getEstimatorParamMaps(maxIndex)
+
+val url = "jdbc:mysql://localhost:8889/mysql"
+val driver = "com.mysql.jdbc.Driver"
+val username = ""
+val password = ""
+var connection:Connection = _
+try {
+    Class.forName(driver)
+    connection = DriverManager.getConnection(url, username, password)
+    val statement = connection.createStatement
+    val rs = statement.executeQuery(
+        "CREATE TABLE predictions (game_id int, team varchar(32), prob float)"
+    )
+} catch {
+    case e: Exception => e.printStackTrace
+}
+connection.close
+
+
+
+
